@@ -17,6 +17,14 @@ app.get("/blog",(req,res)=>{
     res.send("Bem Vindo ao Meu Blog!");
 });
 
+app.get('/ola/:nome/:cargo/:cor',(req,res)=>{ //Passando parametros na rota
+    res.send(`<h1>Ola ${req.params.nome}<h1> 
+              <h2>Seu cargo e: ${req.params.cargo}</h2> 
+              <h3>Sua cor favorita e: ${req.params.cor}</h3>`
+            ); //Obtendo os parametros da requisição
+  
+})
+
 
 //Abre um servidor na porta 8081
 app.listen(8081,()=>{ // Função callback que é chamado quando o evento é disparado
