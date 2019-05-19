@@ -19,6 +19,10 @@ const  Sequelize = require('sequelize');
        res.render('formulario'); //Renderiza o html da pasta view
     })
 
+    app.post('/add',(req,res)=>{
+        res.send("Formulario recebido");
+    })
+
 
 
 
