@@ -14,6 +14,10 @@ const  Sequelize = require('sequelize');
         dialect: "mysql"
     });
 
+//Rotas
+    app.get('/cad',(req,res)=>{
+       res.render('formulario'); //Renderiza o html da pasta view
+    })
 
 
 
