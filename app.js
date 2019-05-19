@@ -1,30 +1,21 @@
 const express = require('express'); // Importando modulo do express
 const app = express(); //Criando uma instancia do express na variavel app
+const handlebars = require('express-handlebars');
+const  Sequelize = require('sequelize');
+
+//Config
+    //Template Engine
+    app.engine('handlebars',handlebars({defaultLayout: 'main'}))
+    app.set('view engine','handlebars');
+
+//Conexão com o banco de dados MySql
+    const sequelize = new Sequelize('teste','root','123456',{
+        host: "localhost",
+        dialect: "mysql"
+    });
 
 
-//Rota principal do app
-app.get("/",(req,res)=>{ //req é uma requisição recebida, e rep são as respostas da requisição
-    res.sendFile(`${__dirname}/html/index.html`); //
-});
 
-//Rota sobre
-app.get("/sobre",(req,res)=>{
-    res.sendFile(`${__dirname}/html/sobre.html`);
-    //res.send("Minha Pagina Sobre"); // Envia uma mensagem do usuário
-});
-
-//Rota do Blog
-app.get("/blog",(req,res)=>{
-    res.send("Bem Vindo ao Meu Blog!");
-});
-
-app.get('/ola/:nome/:cargo/:cor',(req,res)=>{ //Passando parametros na rota
-    res.send(`<h1>Olaaa ${req.params.nome}<h1> 
-              <h2>Seu cargo e: ${req.params.cargo}</h2> 
-              <h3>Sua cor favorita e: ${req.params.cor}</h3>`
-            ); //Obtendo os parametros da requisição
-  
-})
 
 
 //Abre um servidor na porta 8081
