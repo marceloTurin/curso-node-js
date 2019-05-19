@@ -1,12 +1,16 @@
 const express = require('express'); // Importando modulo do express
 const app = express(); //Criando uma instancia do express na variavel app
 const handlebars = require('express-handlebars');
+const bodyParser = require('body-parser')
 const  Sequelize = require('sequelize');
 
 //Config
     //Template Engine
     app.engine('handlebars',handlebars({defaultLayout: 'main'}))
     app.set('view engine','handlebars');
+//Body Parser
+    app.use(bodyParser.urlencoded({extended:false}));
+    app.use(bodyParser.json());
 
 //Conexão com o banco de dados MySql
     const sequelize = new Sequelize('teste','root','123456',{
@@ -20,6 +24,8 @@ const  Sequelize = require('sequelize');
     })
 
     app.post('/add',(req,res)=>{
+        req.body.conteudo //Pega o conteudo do formulario atraves do name
+        res.send(`Texto: ${req.body.titulo} Conteudo ${req.body.conteudo}`)
         res.send("Formulario recebido");
     })
 
