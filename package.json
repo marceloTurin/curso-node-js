@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    
+    "mysql2": "^1.6.5",
+    "sequelize": "^5.8.6"
   },
   "devDependencies": {
     "nodemon": "^1.19.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev" : "nodemon app.js"
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
