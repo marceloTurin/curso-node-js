@@ -49,6 +49,50 @@ const moment = require('moment')
        })
     })
 
+    app.get('/deletar/:id',(req,res)=>{
+        Post.destroy({where: {'id' : req.params.id}})
+        .then(()=>{
+            res.send("Postagem deletada com sucesso!")
+        })
+        .catch((erro)=>{
+            res.send(`Esta postagem não existe`)
+        })
+    });
+
+
+    app.get('/edit/:id', function(req, res){
+        Post.findByPk(req.params.id)
+          .then(post => {
+            res.render('form-edit', {
+              id: req.params.id,
+              titulo: post.titulo,
+              conteudo: post.conteudo
+            })
+          })
+          .catch(err => {
+            res.send('Post não encontrado!')
+          })
+      })
+
+      app.post('/editado/:id', function(req, res){
+        Post.update({
+          titulo: req.body.titulo,
+          conteudo: req.body.conteudo
+        },
+        {
+          where: { id: req.params.id }
+        }).then(()=>{
+          res.redirect('/')
+        }).catch((err)=>{
+          console.log(err);
+        })
+      })
+
+    
+
+
+
+
 
 
 

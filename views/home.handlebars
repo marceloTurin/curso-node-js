@@ -1,11 +1,37 @@
-<h1>Lista de Post</h1>
 
-{{#each posts}} <!-- Função each que para cada postagem faça alguma coisa -->
-   
-    <h1>{{titulo}}</h1>
-    <p>{{conteudo}}</p>
-    <small>{{#formatDate createdAt}}{{/formatDate}}</small>
 
-    <hr>
-{{/each}}
-
+<div class="container">
+     <h1>Lista de postagens:</h1>
+     <form class="new-post" action="/cad" method="get">
+        <button type="submit" class="btn btn-success">Nova Postagem!</button>
+     </form> <br>   
+    <table class="table table-bordered">
+        <thead>
+            <td>ID</td>
+            <td>Título</td>
+            <td>Conteúdo</td>
+            <td>Ações</td>
+        </thead>
+        <tbody>
+            {{#each posts}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{titulo}}</td>
+                <td>{{conteudo}}</td>
+                <td>
+                    <form class="form-action" action="/edit/{{id}}" method="get">
+                        <button type="submit" class=" btn btn-info">
+                        <i class="material-icons">Editar</i>
+                        </button>
+                    </form>
+                    <form class="form-action" action="/deletar/{{id}}" method="get">
+                        <button type="submit" class="btn btn-danger">
+                        <i class="material-icons">Excluir</i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
