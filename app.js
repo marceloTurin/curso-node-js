@@ -2,12 +2,20 @@ const express = require('express'); // Importando modulo do express
 const app = express(); //Criando uma instancia do express na variavel app
 const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
-const  Post = require('./models/Post');
-
+const Post = require('./models/Post');
+const moment = require('moment')
 
 //Config
     //Template Engine
-    app.engine('handlebars',handlebars({defaultLayout: 'main'}))
+    app.engine('handlebars',handlebars({
+        defaultLayout: 'main',
+        //Função que formata a data
+        helpers: {
+            formatDate: (date)=>{
+                return moment(date).format('DD/MM/YYYY')
+            }
+        }
+    }))
     app.set('view engine','handlebars');
 //Body Parser
     app.use(bodyParser.urlencoded({extended:false}));
@@ -16,7 +24,10 @@ const  Post = require('./models/Post');
 //Rotas
 
     app.get('/',(req,res)=>{
-        res.render('home');
+        //Função que losta todas as postagens 
+        Post.findAll({order: [['id','DESC']]}).then((posts)=>{ //Função que ordena as postagens
+            res.render('home',{posts : posts}) //Renderiza as postagens passando o array de postagem como parametro
+        })
     })
 
     app.get('/cad',(req,res)=>{
