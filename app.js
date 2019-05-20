@@ -17,21 +17,21 @@ const moment = require('moment')
         }
     }))
     app.set('view engine','handlebars');
-//Body Parser
+//Body Parser : Modulo que pega informações do formulario
     app.use(bodyParser.urlencoded({extended:false}));
     app.use(bodyParser.json());
 
 //Rotas
 
     app.get('/',(req,res)=>{
-        //Função que losta todas as postagens 
-        Post.findAll({order: [['id','DESC']]}).then((posts)=>{ //Função que ordena as postagens
+        //Função que lista todas as postagens 
+        Post.findAll({order: [['id','ASC']]}).then((posts)=>{ //Função que ordena as postagens
             res.render('home',{posts : posts}) //Renderiza as postagens passando o array de postagem como parametro
         })
     })
 
     app.get('/cad',(req,res)=>{
-       res.render('formulario'); //Renderiza o html da pasta view
+       res.render('formulario'); //Renderiza o html do formulario
     })
 
 
@@ -39,7 +39,9 @@ const moment = require('moment')
     app.post('/add',(req,res)=>{
        Post.create({  //função que da insert no banco
            titulo : req.body.titulo, //metodo que pega informação no formulario
-           conteudo: req.body.conteudo
+           conteudo: req.body.conteudo,
+           email : req.body.email,
+           dias : req.body.dias
        })
        .then(()=>{ //função callback caso o insert de certo
            res.redirect('/'); //função que redireciona para alguma rota
@@ -52,10 +54,10 @@ const moment = require('moment')
     app.get('/deletar/:id',(req,res)=>{
         Post.destroy({where: {'id' : req.params.id}})
         .then(()=>{
-            res.send("Postagem deletada com sucesso!")
+            res.redirect('/');
         })
         .catch((erro)=>{
-            res.send(`Esta postagem não existe`)
+            res.redirect('/');
         })
     });
 
@@ -66,7 +68,9 @@ const moment = require('moment')
             res.render('form-edit', {
               id: req.params.id,
               titulo: post.titulo,
-              conteudo: post.conteudo
+              conteudo: post.conteudo,
+              email: post.email,
+              dias : post.dias
             })
           })
           .catch(err => {
@@ -77,7 +81,9 @@ const moment = require('moment')
       app.post('/editado/:id', function(req, res){
         Post.update({
           titulo: req.body.titulo,
-          conteudo: req.body.conteudo
+          conteudo: req.body.conteudo,
+          email : req.body.email,
+          dias : req.body.dias
         },
         {
           where: { id: req.params.id }

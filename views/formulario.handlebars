@@ -1,7 +1,12 @@
-<form action="/add" method="POST">
-    <p>Título</p>
-    <input type="text" name="titulo">
-    <p>Conteúdo</p>
-    <textarea name="conteudo"></textarea>
-    <button type="submit">Cadastrar postagem</button>
-</form>
+
+<div class="centralizado">
+    <form action="/add" method="POST" class="formulario-box">
+        <h1>Cadastrar Postagem</h1>
+        <input type="text" name="titulo" class="input-controle" placeholder="Titulo">
+        <textarea name="conteudo" class="input-controle" placeholder="Conteudo"></textarea>
+        <input type="text" name="email" class="input-controle" placeholder="Email">
+        <input type="text" name="dias" class="input-controle" placeholder="Dias">
+        
+        <button type="submit" class="botao-controle">Cadastrar</button>
+    </form>
+</div>

@@ -5,11 +5,13 @@
      <form class="new-post" action="/cad" method="get">
         <button type="submit" class="btn btn-success">Nova Postagem!</button>
      </form> <br>   
-    <table class="table table-bordered">
+    <table class="table table-bordered table-hover" style="background-color:white">
         <thead>
             <td>ID</td>
             <td>Título</td>
             <td>Conteúdo</td>
+            <td>Email</td>
+            <td>Dias</td>
             <td>Ações</td>
         </thead>
         <tbody>
@@ -18,17 +20,22 @@
                 <td>{{id}}</td>
                 <td>{{titulo}}</td>
                 <td>{{conteudo}}</td>
+                <td>{{email}}</td>
+                <td>{{dias}}</td>
                 <td>
-                    <form class="form-action" action="/edit/{{id}}" method="get">
-                        <button type="submit" class=" btn btn-info">
-                        <i class="material-icons">Editar</i>
-                        </button>
-                    </form>
-                    <form class="form-action" action="/deletar/{{id}}" method="get">
-                        <button type="submit" class="btn btn-danger">
-                        <i class="material-icons">Excluir</i>
-                        </button>
-                    </form>
+                    <div style="display:flex">
+                         <form class="mr-3" action="/edit/{{id}}" method="get" style="align-itens:flex-start">
+                            <button type="submit" class=" btn btn-info">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </form>
+                        <form class="form-action" action="/deletar/{{id}}" method="get" style="align-itens:flex-start">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+                    </div>
+                   
                 </td>
             </tr>
             {{/each}}

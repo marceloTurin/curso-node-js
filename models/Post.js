@@ -6,6 +6,12 @@ const Post = db.sequelize.define('postagens',{
   },
    conteudo : {
        type : db.Sequelize.TEXT
+   },
+   email : {
+       type : db.Sequelize.STRING
+   },
+   dias : {
+       type : db.Sequelize.INTEGER
    }
 })
 
